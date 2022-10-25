@@ -1,0 +1,14 @@
+---
+write_files:
+  - path: /etc/hosts
+    permissions: 0644
+    content: |
+      10.160.70.25 pulp-slave
+  - path: /root/parse_manifest.sh
+    permissions: 0755
+    content: |
+      #!/usr/bin/bash
+      jq -c '.clusters[] | select(.clusterName == "pipeline-lemur-instance") | .ansibleImageVersion' /tmp/cluster_manifest.json
+runcmd:
+  - ls -al /mnt
+  - touch /test.txt

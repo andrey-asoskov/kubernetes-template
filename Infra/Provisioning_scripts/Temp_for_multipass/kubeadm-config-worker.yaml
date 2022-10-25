@@ -1,0 +1,8 @@
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: JoinConfiguration
+discovery:
+  bootstrapToken:
+    token: aiq9m8.fdpcrbiwehcfyoqz
+    apiServerEndpoint: "192.168.64.6:6443"
+    caCertHashes: ["sha256:29cab77912c0216f2efd94d5fefca6a507f02ae1f0a5b964478d8e5d0667425c"]
