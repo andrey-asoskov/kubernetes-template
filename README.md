@@ -1,6 +1,6 @@
 # kubernetes-template
 
-Kubernetes Cluster template to be tested via GHA and deployed via Terraform & kubeadm as self-managed cluster on AWS.
+Kubernetes Cluster template
 
 ## Prerequisites (Tested on)
 
@@ -17,20 +17,20 @@ Kubernetes Cluster template to be tested via GHA and deployed via Terraform & ku
 
 ## Contents
 
-| Path               | Description                                                              |
-|--------------------|--------------------------------------------------------------------------|
-| .github/workflows/ | CI pipelines to test the Terraform config |
-| Infra/               | App code                                                                 |
-| .markdownlint.yaml
-| .pre-commit-config.yaml
+| Path                    | Description                                                              |
+|-------------------------|--------------------------------------------------------------------------|
+| .github/workflows/      | CI pipelines to test the Terraform config                                |
+| Infra/                  | App code                                                                 |
+| .markdownlint.yaml      |
+| .pre-commit-config.yaml |
 | .yamllint.yaml
 
 ### Test GHA workflows locally
 
 ```commandline
 # Test using medium image
-act --rm -W ./.github/workflows/terraform.yml  -j terraform-test -P ubuntu-22.04=ghcr.io/catthehacker/ubuntu:act-22.04
+act --rm -W ./.github/workflows/terraform.yml -P ubuntu-22.04=ghcr.io/catthehacker/ubuntu:act-22.04
 
 # Test using full image 20.04
-act --rm -W ./.github/workflows/terraform.yml  -P ubuntu-22.04=catthehacker/ubuntu:full-20.04
+act --rm -W ./.github/workflows/terraform.yml -P ubuntu-22.04=catthehacker/ubuntu:full-20.04
 ```

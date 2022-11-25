@@ -57,8 +57,8 @@ resource "aws_s3_bucket_public_access_block" "config_bucket" {
 
 data "archive_file" "scripts" {
   type        = "zip"
-  source_dir  = "${path.module}/../../../../Provisioning_scripts"
-  output_path = "${path.module}/../../../../scripts.zip"
+  source_dir  = "${path.module}/../../../../../Provisioning_scripts"
+  output_path = "${path.module}/../../../../../scripts.zip"
 }
 
 resource "aws_s3_object" "scripts" {
