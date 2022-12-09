@@ -6,7 +6,10 @@ module "worker" {
   solution_short = var.solution_short
 
   subnets_public_ids = data.terraform_remote_state.VPC.outputs.subnets_public_ids
-  sg_worker_id       = data.terraform_remote_state.VPC.outputs.sg_control_plane_id
+  security_groups = [
+    data.terraform_remote_state.VPC.outputs.sg_worker_id,
+    data.terraform_remote_state.VPC.outputs.sg_cni-calico_id
+  ]
 
   asg_worker_instance_type = var.asg_worker_instance_type
   asg_worker_DesiredSize   = var.asg_worker_DesiredSize

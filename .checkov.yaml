@@ -59,6 +59,9 @@ skip-check:
   - CKV_AWS_116  # Ensure AWS Lambda function is configured for a DLQ
   - CKV_AWS_111  # Ensure IAM policies does not allow write access without constraints
   - CKV_AWS_109  # Ensure IAM policies does not allow permissions management / resource exposure without constraints
+  - CKV_AWS_229  # Ensure no NACL allow ingress from 0.0.0.0:0 to port 21
+  - CKV_AWS_230  # Ensure no NACL allow ingress from 0.0.0.0:0 to port 20
+  - CKV_AWS_232  # "Ensure no NACL allow ingress from 0.0.0.0:0 to port 22"
     # - CKV2_AWS_31 # Ensure WAF2 has a Logging Configuration
     # - CKV_AWS_192 # Ensure WAF prevents message lookup in Log4j2
     # - CKV_AWS_158 # Ensure that CloudWatch Log Group is not encrypted by KMS

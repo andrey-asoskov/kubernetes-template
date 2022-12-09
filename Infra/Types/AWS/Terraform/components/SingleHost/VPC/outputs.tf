@@ -35,3 +35,8 @@ output "sg_worker_id" {
   value       = module.VPC.sg_worker_id
   description = "worker security group id"
 }
+
+output "sg_cni-calico_id" {
+  value       = module.VPC.sg_cni-calico_id
+  description = "cni-calico security group id"
+}

@@ -14,9 +14,9 @@ variable "solution_short" {
 }
 
 // VPC config
-variable "sg_control_plane_id" {
-  type        = string
-  description = "SG Control Plane id"
+variable "security_groups" {
+  type        = list(string)
+  description = "List of Security Groups"
 }
 
 variable "subnets_public_ids" {

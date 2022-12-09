@@ -36,5 +36,7 @@ aws s3 cp s3://${CONFIG_S3_BUCKET}/kubeadm-config-worker.yaml /tmp/kubeadm-confi
 
 kubeadm join  \
         --config /tmp/kubeadm-config-worker.yaml
+rm -rf /tmp/kubeadm-config-worker.yaml
 
+#Install kubectl
 bash ./setup_kubectl.sh

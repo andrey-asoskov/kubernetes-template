@@ -7,7 +7,7 @@ resource "aws_launch_template" "worker" {
 
   network_interfaces {
     associate_public_ip_address = true
-    security_groups             = [var.sg_worker_id]
+    security_groups             = var.security_groups
   }
 
   iam_instance_profile {

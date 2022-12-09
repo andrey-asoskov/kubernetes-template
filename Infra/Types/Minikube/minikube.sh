@@ -17,12 +17,12 @@ minikube start \
 #HA
 minikube start \
 --driver=hyperkit \
---kubernetes-version=v1.25.0 \
+--kubernetes-version=v1.25.3 \
 --container-runtime=containerd \
 --bootstrapper=kubeadm \
 --memory=4g \
---cpus='1' \
---nodes=3 \
+--cpus='2' \
+--nodes=2 \
 --cni calico \
 --extra-config=kubelet.authentication-token-webhook=true \
 --extra-config=kubelet.authorization-mode=Webhook \

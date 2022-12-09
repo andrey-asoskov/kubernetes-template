@@ -10,9 +10,9 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
     hooks:
-      - id: check-yaml
-        exclude: '^Helm/charts/app/templates/|^K8s-manifests/'
-        files: ^.*\.(yaml|yml)$
+      # - id: check-yaml
+      #   exclude: '^Helm/charts/app/templates/|^K8s-manifests/'
+      #   files: ^.*\.(yaml|yml)$
       - id: detect-private-key
       - id: check-added-large-files
       - id: check-executables-have-shebangs
@@ -76,7 +76,7 @@ repos:
       - id: terraform_checkov
         verbose: true
         # exclude: ^Test\/
-        #files: ^Infra/AWS/Terraform
+        # files: ^Infra/AWS/Terraform
         args:
           - --args=--config-file=__GIT_WORKING_DIR__/.checkov.yaml
           - --args=--skip-path Test

@@ -35,3 +35,8 @@ output "sg_worker_id" {
   value       = aws_security_group.worker.id
   description = "worker security group id"
 }
+
+output "sg_cni-calico_id" {
+  value       = aws_security_group.cni-calico.id
+  description = "cni-calico security group id"
+}

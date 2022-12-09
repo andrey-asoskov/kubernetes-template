@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubernetes.io/metadata.name: test1
+    pod-security.kubernetes.io/enforce: restricted
+  name: test1
+spec:
+  finalizers:
+    - kubernetes
