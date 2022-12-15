@@ -85,7 +85,7 @@ repos:
     rev: v0.0.8
     hooks:
       - id: k8svalidate
-        # args: [--exclude, "Helm/**"]
+        args: [--exclude, "Infra/**"]
         types: [file, yaml]
         # files: .yaml$
-        # exclude: ^Helm
+        exclude: ^Infra

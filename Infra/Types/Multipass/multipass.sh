@@ -29,7 +29,7 @@ apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
 clusterName: multipass
 certificatesDir: /etc/kubernetes/pki
-kubernetesVersion: "1.24.5"
+kubernetesVersion: "1.25.4"
 networking:
   dnsDomain: cluster.local
   serviceSubnet: "10.96.0.0/12"

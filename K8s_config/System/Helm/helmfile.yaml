@@ -1,0 +1,134 @@
+---
+repositories:
+  - name: projectcalico
+    url: https://docs.projectcalico.org/charts
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+  - name: gatekeeper
+    url: https://open-policy-agent.github.io/gatekeeper/charts
+  - name: metrics-server
+    url: https://kubernetes-sigs.github.io/metrics-server/
+  - name: kubernetes-dashboard
+    url: https://kubernetes.github.io/dashboard/
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: elastic
+    url: https://helm.elastic.co
+
+helmDefaults:
+  atomic: true
+  createNamespace: true
+  cleanupOnFail: true
+  verify: true
+  timeout: 300
+  wait: true
+
+releases:
+  - name: calico
+    chart: projectcalico/tigera-operator
+    version: v3.24.5
+    labels:
+      purpose: networking
+      set: core
+    namespace: tigera-operator
+    createNamespace: true
+    verify: false  # to skip signature checks
+    disableValidation: true  # if CRDs are used
+    # values:
+    #   - "./values/tigera-operator/values.yaml"
+  - name: gatekeeper
+    chart: gatekeeper/gatekeeper
+    version: 3.9.1
+    labels:
+      purpose: policy
+      set: core
+    namespace: gatekeeper-system
+    createNamespace: true
+    verify: false  # to skip signature checks
+    disableValidation: true  # if CRDs are used
+    # values:
+    #   - "./values/gatekeeper/values.yaml"
+  - name: ingress-nginx
+    chart: ingress-nginx/ingress-nginx
+    version: 4.4.0
+    labels:
+      purpose: ingress
+      set: core
+    namespace: ingress
+    createNamespace: true
+    verify: false  # to skip signature checks
+    disableValidation: true  # if CRDs are used
+    values:
+      - "./values/ingress-nginx/values.yaml"
+  # - name: metrics-server
+  #   chart: metrics-server/metrics-server
+  #   version: 3.8.3
+  #   labels:
+  #     purpose: monitoring
+  #     set: supplements
+  #   namespace: monitoring
+  #   createNamespace: true
+  #   verify: false # to skip signature checks
+  #   disableValidation: true  # if CRDs are used
+  #   values:
+  #     - "./values/metrics-server/values.yaml"
+  - name: kubernetes-dashboard  # Incudes metrics-server
+    chart: kubernetes-dashboard/kubernetes-dashboard
+    version: 6.0.0
+    labels:
+      purpose: monitoring
+      set: supplements
+    namespace: monitoring
+    createNamespace: true
+    verify: false  # to skip signature checks
+    disableValidation: true  # if CRDs are used
+    values:
+      - "./values/kubernetes-dashboard/values.yaml"
+  - name: kube-prometheus-stack
+    chart: prometheus-community/kube-prometheus-stack
+    version: 41.7.4
+    labels:
+      purpose: monitoring
+      set: supplements
+    namespace: monitoring
+    createNamespace: true
+    verify: false  # to skip signature checks
+    disableValidation: true  # if CRDs are used
+    values:
+      - "./values/kube-prometheus-stack/values.yaml"
+  - name: filebeat
+    chart: elastic/filebeat
+    version: 7.17.3
+    labels:
+      purpose: logging
+      set: supplements
+    namespace: logging
+    createNamespace: true
+    verify: false  # to skip signature checks
+    disableValidation: true  # if CRDs are used
+    values:
+      - "./values/filebeat/values.yaml"
+  - name: elasticsearch
+    chart: elastic/elasticsearch
+    version: 7.17.3
+    labels:
+      purpose: logging
+      set: supplements
+    namespace: logging
+    createNamespace: true
+    verify: false  # to skip signature checks
+    disableValidation: true  # if CRDs are used
+    values:
+      - "./values/elasticsearch/values.yaml"
+  - name: kibana
+    chart: elastic/kibana
+    version: 7.17.3
+    labels:
+      purpose: logging
+      set: supplements
+    namespace: logging
+    createNamespace: true
+    verify: false  # to skip signature checks
+    disableValidation: true  # if CRDs are used
+    values:
+      - "./values/kibana/values.yaml"

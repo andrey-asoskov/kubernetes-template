@@ -5,8 +5,8 @@ Kubernetes Cluster template
 ## Prerequisites (Tested on)
 
 - Terraform 1.3.3
-- kubectl v1.25.2
-- Helm v3.10.0
+- kubectl v1.26.0
+- Helm v3.10.2
 - Helm Chart Testing 3.7.1
 
 ## CI/CD status
@@ -20,10 +20,11 @@ Kubernetes Cluster template
 | Path                    | Description                                                              |
 |-------------------------|--------------------------------------------------------------------------|
 | .github/workflows/      | CI pipelines to test the Terraform config                                |
-| Infra/                  | App code                                                                 |
+| Infra/                  | Infra config                                                             |
+| K8s_config              |
 | .markdownlint.yaml      |
 | .pre-commit-config.yaml |
-| .yamllint.yaml
+| .yamllint.yaml          |
 
 ### Test GHA workflows locally
 

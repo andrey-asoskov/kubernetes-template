@@ -13,7 +13,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: network-untrusted  # Allow external access to Internet except other namespaces
+  name: egress-out-of-cluster  # Allow external access to Internet except other namespaces
 spec:
   podSelector: {}
   policyTypes:
@@ -23,15 +23,14 @@ spec:
         - ipBlock:
             cidr: 0.0.0.0/0
             except:
-              - 10.0.0.0/8
-              - 172.16.0.0/12
-              - 192.168.0.0/16
-              - 100.64.0.0/10
+              - 10.1.0.0/16  # VPC
+              # - 192.168.0.0/16  # podSubnet
+              # - 10.96.0.0/12  # serviceSubnet
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-dns-only
+  name: egress-dns
 spec:
   podSelector: {}
   policyTypes:
@@ -42,3 +41,58 @@ spec:
           protocol: UDP
         - port: 53
           protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-from-vpc  # for health checks
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: 10.1.0.0/16
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-inter-namespace
+spec:
+  podSelector: {}  # All pods in namespace
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector: {}  # All pods in namespace
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ingress-ingress
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              "kubernetes.io/metadata.name": ingress
+---
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ingress-monitoring
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              "kubernetes.io/metadata.name": monitoring

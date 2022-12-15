@@ -3,7 +3,7 @@
 #Single node
 minikube start \
 --driver=hyperkit \
---kubernetes-version=v1.25.0 \
+--kubernetes-version=v1.25.4 \
 --container-runtime=containerd \
 --bootstrapper=kubeadm \
 --memory=6g \
@@ -14,10 +14,14 @@ minikube start \
 --extra-config=scheduler.bind-address=0.0.0.0 \
 --extra-config=controller-manager.bind-address=0.0.0.0
 
+minikube start \
+--kubernetes-version=v1.25.4 \
+--cni calico
+
 #HA
 minikube start \
 --driver=hyperkit \
---kubernetes-version=v1.25.3 \
+--kubernetes-version=v1.25.4 \
 --container-runtime=containerd \
 --bootstrapper=kubeadm \
 --memory=4g \

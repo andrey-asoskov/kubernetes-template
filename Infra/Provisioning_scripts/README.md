@@ -67,9 +67,6 @@ systemctl restart haproxy
         --config /tmp/kubeadm-config.yaml
 ```
 
-9. Setup Calico via running the script "scripts/control_plane/2.setup_calico.sh" on any node
-
-
 ## Worker
 1. Start 3 nodes
 aws s3 rm s3://323483035543-k8s-dev --recursive --profile flashslash
@@ -83,6 +80,6 @@ aws s3 cp s3://323483035543-k8s-dev/admin.conf ~/.kube/dev-cluster.config --prof
 vim  ~/.kube/dev-cluster.config
 
 export KUBECONFIG=~/.kube/dev-cluster.config
+#export KUBECONFIG=~/.kube/config
 
 kubectl get nodes
-

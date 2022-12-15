@@ -51,7 +51,7 @@ resource "aws_security_group" "control_plane" {
   }
 }
 
-/*resource "aws_security_group_rule" "control_plane_IN" { #tfsec:ignore:aws-ec2-no-public-ingress-sgr #tfsec:ignore:aws-vpc-no-public-ingress-sgr
+resource "aws_security_group_rule" "control_plane_IN" { #tfsec:ignore:aws-ec2-no-public-ingress-sgr #tfsec:ignore:aws-vpc-no-public-ingress-sgr
   type              = "ingress"
   description       = "Allow incomming connections to control plane"
   from_port         = 6443
@@ -59,7 +59,7 @@ resource "aws_security_group" "control_plane" {
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.control_plane.id
-} */
+}
 
 resource "aws_security_group_rule" "control_plane_IN_lb" {
   type                     = "ingress"
@@ -76,6 +76,16 @@ resource "aws_security_group_rule" "control_plane_workers_IN" {
   description              = "Allow incomming connections from workers"
   from_port                = 6443
   to_port                  = 6443
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.worker.id
+  security_group_id        = aws_security_group.control_plane.id
+}
+
+resource "aws_security_group_rule" "control_plane_metrics_IN" {
+  type                     = "ingress"
+  description              = "Allow incomming connections to get metrics"
+  from_port                = 10250
+  to_port                  = 10250
   protocol                 = "tcp"
   source_security_group_id = aws_security_group.worker.id
   security_group_id        = aws_security_group.control_plane.id
