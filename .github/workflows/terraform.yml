@@ -6,14 +6,14 @@ on:
       - '**'
     paths:
       - .github/workflows/terraform.yml
-      - Infra/AWS/Terraform/**
+      - Infra/Types/AWS/Terraform/**
       - .checkov.yaml
   push:
     branches:
       - '**'
     paths:
       - .github/workflows/terraform.yml
-      - Infra/AWS/Terraform/**
+      - Infra/Types/AWS/Terraform/**
       - .checkov.yaml
 
 jobs:
